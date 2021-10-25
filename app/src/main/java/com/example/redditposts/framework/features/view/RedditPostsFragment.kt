@@ -8,18 +8,15 @@ import android.widget.Toast
 import androidx.compose.material.Text
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import com.example.redditposts.business.datasource.remote.implementation.RedditPostsDataSourceImpl
-import com.example.redditposts.business.datasource.remote.retrofit.RetrofitBuilder
-import com.example.redditposts.business.datasource.remote.services.RedditPostsService
+import androidx.fragment.app.viewModels
 import com.example.redditposts.business.entities.response.Post
 import com.example.redditposts.business.entities.state.UiState
-import com.example.redditposts.business.repository.implementation.RedditPostsRepositoryImpl
 import com.example.redditposts.framework.features.viewmodel.RedditPostsViewModel
-import com.example.redditposts.framework.utils.RedditPostsViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RedditPostsFragment : Fragment() {
-    private lateinit var redditPostsViewModel: RedditPostsViewModel
+    val redditPostsViewModel: RedditPostsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,20 +32,8 @@ class RedditPostsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setUpViewModel()
         sendRequests()
         setUpObservers()
-
-    }
-
-    private fun setUpViewModel(){
-        val viewModelFactory = RedditPostsViewModelFactory(
-            RedditPostsRepositoryImpl(RedditPostsDataSourceImpl(
-                RetrofitBuilder.buildService(RedditPostsService::class.java)
-            ))
-        )
-        redditPostsViewModel = ViewModelProvider(this,viewModelFactory)
-            .get(RedditPostsViewModel::class.java)
     }
 
     private fun sendRequests(){

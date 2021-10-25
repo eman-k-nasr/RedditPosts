@@ -1,23 +1,27 @@
 package com.example.redditposts.framework.features.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.redditposts.business.entities.response.Post
 import com.example.redditposts.business.entities.state.UiState
 import com.example.redditposts.business.repository.abstraction.RedditPostsRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-
-class RedditPostsViewModel(val repo: RedditPostsRepository) : ViewModel() {
+@HiltViewModel
+class RedditPostsViewModel @Inject constructor(private val repo: RedditPostsRepository) :
+    ViewModel() {
     private val _redditPostsUiState: MutableLiveData<UiState<List<Post>>> =
         MutableLiveData()
-    val redditPostsUiState: MutableLiveData<UiState<List<Post>>>
+    val redditPostsUiState: LiveData<UiState<List<Post>>>
         get() = _redditPostsUiState
 
     private val _searchRedditPostsUiState: MutableLiveData<UiState<List<Post>>> =
         MutableLiveData()
-    val searchRedditPostsUiState: MutableLiveData<UiState<List<Post>>>
+    val searchRedditPostsUiState: LiveData<UiState<List<Post>>>
         get() = _searchRedditPostsUiState
 
     fun getRedditPostsRepository(type: String, limit: Int, after: String) {

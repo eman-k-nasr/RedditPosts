@@ -3,7 +3,7 @@ package com.example.redditposts.business.repository.implementation
 import com.example.redditposts.business.datasource.remote.abstraction.RedditPostsDataSource
 import com.example.redditposts.business.repository.abstraction.RedditPostsRepository
 
-class RedditPostsRepositoryImpl(val redditPostsDataSource: RedditPostsDataSource) :
+class RedditPostsRepositoryImpl(private val redditPostsDataSource: RedditPostsDataSource) :
     RedditPostsRepository {
     override suspend fun getRedditPosts(
         type: String,
