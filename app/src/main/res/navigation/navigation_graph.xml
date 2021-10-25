@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/redditPostsFragment"
-        android:name="com.example.redditposts.ui.features.view.RedditPostsFragment"
+        android:name="com.example.redditposts.framework.features.view.RedditPostsFragment"
         android:label="RedditPostsFragment" />
 </navigation>

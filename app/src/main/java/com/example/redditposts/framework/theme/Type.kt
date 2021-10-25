@@ -1,4 +1,4 @@
-package com.example.redditposts.ui.theme
+package com.example.redditposts.framework.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

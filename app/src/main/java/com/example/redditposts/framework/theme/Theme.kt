@@ -1,4 +1,4 @@
-package com.example.redditposts.ui.theme
+package com.example.redditposts.framework.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
