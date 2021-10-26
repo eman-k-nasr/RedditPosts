@@ -1,7 +1,7 @@
 package com.example.redditposts.framework.features.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.redditposts.business.entities.response.Post
@@ -14,37 +14,34 @@ import javax.inject.Inject
 @HiltViewModel
 class RedditPostsViewModel @Inject constructor(private val repo: RedditPostsRepository) :
     ViewModel() {
-    private val _redditPostsUiState: MutableLiveData<UiState<List<Post>>> =
-        MutableLiveData()
-    val redditPostsUiState: LiveData<UiState<List<Post>>>
-        get() = _redditPostsUiState
-
-    private val _searchRedditPostsUiState: MutableLiveData<UiState<List<Post>>> =
-        MutableLiveData()
-    val searchRedditPostsUiState: LiveData<UiState<List<Post>>>
-        get() = _searchRedditPostsUiState
+    var redditPostsUiState: MutableState<UiState<List<Post>>> =
+        mutableStateOf(UiState.Empty)
 
     fun getRedditPostsRepository(type: String, limit: Int, after: String) {
-        _redditPostsUiState.value = UiState.Loading
+        redditPostsUiState.value = UiState.Loading(true)
         viewModelScope.launch {
             try {
                 val response = repo.getRedditPosts(type, limit, after)
-                _redditPostsUiState.value = UiState.Success(response.data.posts)
+                redditPostsUiState.value = UiState.Loading(false)
+                redditPostsUiState.value = UiState.Success(response.data.posts)
             } catch (ex: Exception) {
-                _redditPostsUiState.value =
+                redditPostsUiState.value = UiState.Loading(false)
+                redditPostsUiState.value =
                     UiState.Error(ex.message ?: "some error..")
             }
         }
     }
 
     fun searchRedditPostsRepository(query: String, limit: Int, after: String) {
-        _searchRedditPostsUiState.value = UiState.Loading
+        redditPostsUiState.value = UiState.Loading(true)
         viewModelScope.launch {
             try {
                 val response = repo.searchRedditPosts(query, limit, after)
-                _searchRedditPostsUiState.value = UiState.Success(response.data.posts)
+                redditPostsUiState.value = UiState.Loading(false)
+                redditPostsUiState.value = UiState.Success(response.data.posts)
             } catch (ex: Exception) {
-                _searchRedditPostsUiState.value =
+                redditPostsUiState.value = UiState.Loading(false)
+                redditPostsUiState.value =
                     UiState.Error(ex.message ?: "some error..")
             }
         }

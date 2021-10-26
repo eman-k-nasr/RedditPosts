@@ -90,6 +90,9 @@ dependencies {
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_lifecycle_version"
     kapt "androidx.hilt:hilt-compiler:$hilt_lifecycle_version"
 
+    //coil
+    implementation "io.coil-kt:coil-compose:$coil_version"
+
     //testing
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "androidx.test.ext:junit:$junitExt_version"
