@@ -43,7 +43,7 @@ fun RedditPostCard(post: Post, onClick: () -> Unit) {
                 style = MaterialTheme.typography.h6
             )
             post.postData.thumbnail?.let {
-                CoilImage(it)
+                CoilImage(it,post.postData.isVideo)
             }
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween
@@ -53,7 +53,7 @@ fun RedditPostCard(post: Post, onClick: () -> Unit) {
                     style = MaterialTheme.typography.subtitle2
                 )
                 Text(
-                    text = "comments: ${post.postData.numComments}",
+                    text = "comments: ${post.postData.numComments}, isVideo: ${post.postData.isVideo}",
                     modifier = Modifier.wrapContentWidth(Alignment.End),
                     style = MaterialTheme.typography.subtitle2
                 )
