@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudy/jetpackcompose/RedditPosts/app/src/main/res/drawable/ic_arrow_up_24.xml" value="0.1" />
         <entry key="..\:/AndroidStudy/jetpackcompose/RedditPosts/app/src/main/res/drawable/ic_default_48.xml" value="0.11875" />
         <entry key="..\:/AndroidStudy/jetpackcompose/RedditPosts/app/src/main/res/layout/activity_main.xml" value="0.103596757852077" />
         <entry key="..\:/AndroidStudy/jetpackcompose/RedditPosts/app/src/main/res/layout/fragment_reddit_posts.xml" value="0.1" />

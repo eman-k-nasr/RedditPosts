@@ -10,10 +10,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
@@ -103,8 +101,8 @@ fun RedditPostCard(post: Post, onClick: () -> Unit) {
                 )
             }
 
-            post.postData.thumbnail?.let {
-                CoilImage(it, post.postData.isVideo)
+            if(post.postData.thumbnail.startsWith("https://")){
+                CoilImage(post.postData.thumbnail, post.postData.isVideo)
             }
 
             Row(
