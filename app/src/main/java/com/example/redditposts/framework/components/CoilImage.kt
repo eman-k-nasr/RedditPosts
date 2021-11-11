@@ -1,13 +1,11 @@
 package com.example.redditposts.framework.utils
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.ContentScale.Companion.FillWidth
 import androidx.compose.ui.res.painterResource
 import coil.annotation.ExperimentalCoilApi
@@ -16,7 +14,7 @@ import com.example.redditposts.R
 
 @ExperimentalCoilApi
 @Composable
-fun CoilImage(url: String,isVideo:Boolean) {
+fun CoilImage(url: String, isVideo: Boolean) {
     Box(contentAlignment = Alignment.Center) {
         val painter = rememberImagePainter(
             data = url,
@@ -29,13 +27,13 @@ fun CoilImage(url: String,isVideo:Boolean) {
 
         Image(
             painter = painter,
-            contentScale = FillWidth,
+            contentScale = ContentScale.Crop,
             contentDescription = "post image",
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(1f)
         )
-        if(isVideo){
+        if (isVideo) {
             Image(
                 painter = iconPainter,
                 contentDescription = "play icon",
