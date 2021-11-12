@@ -1,4 +1,4 @@
-package com.example.redditposts.framework.features.view
+package com.example.redditposts.framework.features.search.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,12 +15,13 @@ import androidx.fragment.app.viewModels
 import coil.annotation.ExperimentalCoilApi
 import com.example.redditposts.business.entities.response.Post
 import com.example.redditposts.business.entities.state.UiState
+import com.example.redditposts.business.entities.enums.RedditPostsEvent.NextPageEvent
 import com.example.redditposts.business.utils.Constants.Companion.PAGE_SIZE
 import com.example.redditposts.framework.components.CircularProgressBar
 import com.example.redditposts.framework.components.ErrorState
 import com.example.redditposts.framework.components.RedditPostCard
 import com.example.redditposts.framework.components.SearchBar
-import com.example.redditposts.framework.features.viewmodel.RedditPostsViewModel
+import com.example.redditposts.framework.features.search.viewmodel.RedditPostsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @ExperimentalUnitApi
@@ -43,7 +44,7 @@ class RedditPostsFragment : Fragment() {
                     SearchBar(
                        query = query,
                        onQueryChanged = redditPostsViewModel::onQueryChanged,
-                       onExecuteSearch = redditPostsViewModel::searchRedditPosts
+                       onExecuteSearch = redditPostsViewModel::onTriggerEvent
                     )
                     HandleUiState(response, page)
                 }
@@ -66,7 +67,7 @@ class RedditPostsFragment : Fragment() {
             itemsIndexed(items = list) { index, post ->
                 redditPostsViewModel.onChangeScrollPosition(index)
                 if ((index + 1) >= (page * PAGE_SIZE)) {
-                    redditPostsViewModel.nextPage()
+                    redditPostsViewModel.onTriggerEvent(NextPageEvent)
                 }
                 RedditPostCard(post = post, onClick = {})
             }

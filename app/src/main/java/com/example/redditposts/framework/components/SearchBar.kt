@@ -18,12 +18,14 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.example.redditposts.R
+import com.example.redditposts.business.entities.enums.RedditPostsEvent
+import com.example.redditposts.business.entities.enums.RedditPostsEvent.NewSearchEvent
 
 @Composable
 fun SearchBar(
     query : String,
     onQueryChanged: (String) -> Unit,
-    onExecuteSearch: () -> Unit
+    onExecuteSearch: (RedditPostsEvent) -> Unit
 ) {
     val focusManager = LocalFocusManager.current
 
@@ -53,7 +55,7 @@ fun SearchBar(
         ),
         keyboardActions = KeyboardActions(
             onDone = {
-                onExecuteSearch()
+                onExecuteSearch(NewSearchEvent)
                 focusManager.clearFocus()
             }
         )
