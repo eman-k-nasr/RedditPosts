@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -18,6 +17,7 @@ import com.example.redditposts.business.entities.response.Post
 import com.example.redditposts.business.entities.state.UiState
 import com.example.redditposts.business.utils.Constants.Companion.PAGE_SIZE
 import com.example.redditposts.framework.components.CircularProgressBar
+import com.example.redditposts.framework.components.ErrorState
 import com.example.redditposts.framework.components.RedditPostCard
 import com.example.redditposts.framework.components.SearchBar
 import com.example.redditposts.framework.features.viewmodel.RedditPostsViewModel
@@ -56,12 +56,8 @@ class RedditPostsFragment : Fragment() {
         when (it) {
             is UiState.Loading -> CircularProgressBar(isLoading = it.isLoading)
             is UiState.Success -> RedditPostRecyclerView(it.data, page)
-            is UiState.Error -> showToast(it.msg)
+            is UiState.Error -> ErrorState(error = it.msg)
         }
-    }
-
-    private fun showToast(text: String) {
-        Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
     }
 
     @Composable
