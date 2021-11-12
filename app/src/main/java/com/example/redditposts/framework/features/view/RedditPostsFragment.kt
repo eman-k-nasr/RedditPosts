@@ -17,6 +17,7 @@ import coil.annotation.ExperimentalCoilApi
 import com.example.redditposts.business.entities.response.Post
 import com.example.redditposts.business.entities.state.UiState
 import com.example.redditposts.business.utils.Constants.Companion.PAGE_SIZE
+import com.example.redditposts.framework.components.CircularProgressBar
 import com.example.redditposts.framework.components.RedditPostCard
 import com.example.redditposts.framework.components.SearchBar
 import com.example.redditposts.framework.features.viewmodel.RedditPostsViewModel
@@ -53,7 +54,7 @@ class RedditPostsFragment : Fragment() {
     @Composable
     private fun HandleUiState(it: UiState<List<Post>>, page: Int) {
         when (it) {
-            is UiState.Loading -> if (it.isLoading) showToast("loading..")
+            is UiState.Loading -> CircularProgressBar(isLoading = it.isLoading)
             is UiState.Success -> RedditPostRecyclerView(it.data, page)
             is UiState.Error -> showToast(it.msg)
         }
