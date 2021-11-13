@@ -7,12 +7,12 @@ plugins {
 }
 
 android {
-    compileSdk 30
+    compileSdk 31
 
     defaultConfig {
         applicationId "com.example.redditposts"
         minSdk 21
-        targetSdk 30
+        targetSdk 31
         versionCode 1
         versionName "1.0"
 
@@ -41,7 +41,7 @@ android {
     }
     composeOptions {
         kotlinCompilerExtensionVersion compose_version
-        kotlinCompilerVersion '1.5.21'
+        kotlinCompilerVersion kotlin_version
     }
     packagingOptions {
         resources {
@@ -64,6 +64,7 @@ dependencies {
     implementation "androidx.compose.material:material:$compose_version"
     implementation "androidx.activity:activity-compose:$activity_compose"
     implementation "androidx.constraintlayout:constraintlayout-compose:$constraintlayout_compose_version"
+    implementation "androidx.navigation:navigation-compose:$navigation_compose_version"
 
     //navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"

@@ -1,4 +1,4 @@
-package com.example.redditposts.framework.features.search.viewmodel
+package com.example.redditposts.framework.features.home.viewmodel
 
 import android.util.Log
 import androidx.compose.runtime.MutableState

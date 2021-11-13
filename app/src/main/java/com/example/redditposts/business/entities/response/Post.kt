@@ -1,11 +1,16 @@
 package com.example.redditposts.business.entities.response
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Post(
     @SerializedName("kind") var kind: String,
     @SerializedName("data") var postData: PostData
-)
+): Parcelable
+
+@Parcelize
 data class PostData(
     @SerializedName("author_fullname") var authorFullname: String,
     @SerializedName("title") var title: String,
@@ -14,7 +19,6 @@ data class PostData(
     @SerializedName("thumbnail") var thumbnail: String,
     @SerializedName("thumbnail_width") var thumbnailWidth: Int,
     @SerializedName("thumbnail_height") var thumbnailHeight : Int,
-    @SerializedName("secure_media") var secureMedia: SecureMedia?,
     @SerializedName("score") var score: Int,
     @SerializedName("ups") var ups : Int,
     @SerializedName("downs") var downs : Int,
@@ -30,4 +34,4 @@ data class PostData(
     @SerializedName("subreddit_subscribers") var subredditSubscribers: Int,
     @SerializedName("created_utc") var createdUtc: Int,
     @SerializedName("is_video") var isVideo: Boolean
-)
+): Parcelable
